@@ -7,15 +7,11 @@ input_data_url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%
 output_file_name <- "tidy.txt"
 
 # Require/install prerequisites
-prerequisites <- function(){
-    if (!require("data.table")) {
-      install.packages("data.table")
-      require("data.table")
-
-    }
-    if (!require("reshape2")) {
-      install.packages("reshape2")
-      require("reshape2")
+load_prerequisites <- function(packages){
+    for(package in packages) {
+        if (!require(package, character.only = TRUE))
+          install.packages(package)
+        require(package, character.only = TRUE)
     }
 }
 
@@ -26,6 +22,7 @@ get_extract_file <- function(url){
     file = basename(URLdecode(url))
     datadir <- gsub(".zip", "", file)
     if(!file.exists(datadir)) {
+        message(sprintf("Did not find '%s' directory", datadir))
         if(!file.exists(file)){
             msg = sprintf("Downloading '%s' from %s...", file, url)
             message(msg)
@@ -39,6 +36,8 @@ get_extract_file <- function(url){
                 writeLines(date(), fc)
                 close(fc)
             }
+        } else {
+            message("Found zip file...")
         }
         message("Unzipping file...")
         unzip(file)
@@ -72,6 +71,7 @@ merge_data_sets <- function(datadir){
     # the activity, names, and merge the 3 files into a single data frame
     # named after the source data set.
     for (source in c("test", "train")){
+        message(sprintf("Processing %s data...", source))
         ## Requirement #4: Appropriately labels the data set with descriptive
         ## variable names. This is satisfied by the col.names parameters to
         ## read.table below
@@ -96,6 +96,7 @@ merge_data_sets <- function(datadir){
     }
     ## Requirement #1: Merges the training and the test sets to create one
     ## data set.
+    message("Merging data sets...")
     return(rbind(train, test))
 }
 
@@ -106,23 +107,30 @@ create_tidy_set <- function(datadir, output_file_name) {
     # First handle requirements 1-4...
     data <- merge_data_sets(datadir)
 
+    fc <- file("CodeBook.columns.txt")
+    writeLines(colnames(data), fc)
+    close(fc)
+
     ## Requirement #5: From the data set in step 4, creates a second,
     ## independent tidy data set with the average of each variable for each
     ## activity and each subject.
 
-
+    message("Pivoting data...")
     # Pivot the values of the data in to individual rows, keeping the
     # identifier columns passed as id intact, resulting in a data frame
     # containing the following columns:
     #   "subject_id", "activity_id", "activity_name", "variable", "value"
     pivoted_data <- melt(data, id = c(
                          "subject_id", "activity_id", "activity_name"))
+    message("Creating tidy data set...")
     # Output the mean of all the values for each variable
     tidy <- dcast(pivoted_data,
                   subject_id + activity_id + activity_name ~ variable, mean)
     # write the tidy data out to a file in the current working directory
+    message(sprintf("Writing tidy data set to '%s'...", output_file_name))
     write.table(tidy, file = output_file_name)
 }
 
+load_prerequisites(c("data.table", "reshape2"))
 datadir <- get_extract_file(input_data_url)
 create_tidy_set(datadir, output_file_name)
