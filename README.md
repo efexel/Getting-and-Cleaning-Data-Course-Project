@@ -10,19 +10,18 @@ used for later analysis.
 
 The project requires the following output:
 
-1. A tidy data set as described below
+1. A tidy data set as described below (http://tinyurl.com/tidy-txt)
 
 1. This Github repository with the run_analysis.R script for performing the analysis
 
-1. A code book (CodeBook.md) that describes the variables, the data, and any transformations or work that you performed to clean up the data called CodeBook.md.
+1. A code book (CodeBook.md) that describes the variables, the data, and any transformations or work that you performed to clean up the data called CodeBook.md.  (http://tinyurl.com/CodeBook-md)
 
-1. This README.md file
+1. This README.md file: http://tinyurl.com/README-md
 
 ## Project
 
 One of the most exciting areas in all of data science right now is wearable
-computing - see for example this article: http://tinyurl.com/dsatatbftwtsb
-. Companies like Fitbit, Nike, and Jawbone Up are racing to develop the most
+computing - see for example this article: http://tinyurl.com/dsatatbftwtsb. Companies like Fitbit, Nike, and Jawbone Up are racing to develop the most
 advanced algorithms to attract new users. The data linked to from the course
 website represent data collected from the accelerometers from the Samsung
 Galaxy S smartphone.
