@@ -10,13 +10,13 @@ used for later analysis.
 
 The project requires the following output:
 
-1. A tidy data set as described below (http://tinyurl.com/tidy-txt)
+1. [A tidy data set as described below](https://github.com/efexel/Getting-and-Cleaning-Data-Course-Project/blob/master/tidy.txt)
 
-1. This Github repository with the run_analysis.R script for performing the analysis
+1. [This Github repository with the run_analysis.R script for performing the analysis](https://github.com/efexel/Getting-and-Cleaning-Data-Course-Project)
 
-1. A code book (CodeBook.md) that describes the variables, the data, and any transformations or work that you performed to clean up the data called CodeBook.md.  (http://tinyurl.com/CodeBook-md)
+1. A [code book](https://github.com/efexel/Getting-and-Cleaning-Data-Course-Project/blob/master/CodeBook.md) that describes the variables, the data, and any transformations or work that you performed to clean up the data called CodeBook.md.
 
-1. This README.md file: http://tinyurl.com/README-md
+1. [This README.md file](https://github.com/efexel/Getting-and-Cleaning-Data-Course-Project/blob/master/README.md)
 
 ## Project
 
@@ -56,8 +56,5 @@ The run_analysis.R script does the following:
 
 ### References
 
-Getting and Cleaning data course:
-	https://www.coursera.org/course/getdata
-
-Data Science Specialization:
-	https://www.coursera.org/specialization/jhudatascience/1
+* [Getting and Cleaning data course](https://www.coursera.org/course/getdata)
+* [Data Science Specialization](https://www.coursera.org/specialization/jhudatascience/1)
