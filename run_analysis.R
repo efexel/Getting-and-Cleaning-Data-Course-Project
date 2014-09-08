@@ -92,7 +92,7 @@ merge_data_sets <- function(datadir){
             match(activities$activity_id, activity_labels$id)]
         # Create a variable named train or test that contains the frames
         # above merged into a single frame
-        assign(source, cbind(activities, subject, data[,output_features]))
+        assign(source, cbind(subject, activities, data[,output_features]))
     }
     ## Requirement #1: Merges the training and the test sets to create one
     ## data set.
@@ -106,10 +106,6 @@ create_tidy_set <- function(datadir, output_file_name) {
 
     # First handle requirements 1-4...
     data <- merge_data_sets(datadir)
-
-    fc <- file("CodeBook.columns.txt")
-    writeLines(colnames(data), fc)
-    close(fc)
 
     ## Requirement #5: From the data set in step 4, creates a second,
     ## independent tidy data set with the average of each variable for each
@@ -125,7 +121,7 @@ create_tidy_set <- function(datadir, output_file_name) {
     message("Creating tidy data set...")
     # Output the mean of all the values for each variable
     tidy <- dcast(pivoted_data,
-                  subject_id + activity_id + activity_name ~ variable, mean)
+                  subject_id + activity_name ~ variable, mean)
     # write the tidy data out to a file in the current working directory
     message(sprintf("Writing tidy data set to '%s'...", output_file_name))
     write.table(tidy, file = output_file_name)
