@@ -54,8 +54,6 @@ The run_analysis.R script does the following:
 
 5. From the data set in step 4, creates a second, independent tidy dataset with the average of each variable for each activity and each subject.
 
-Sample output is included as: run_analysis.html
-
 ### References
 
 Getting and Cleaning data course:
