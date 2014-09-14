@@ -1,0 +1,6 @@
+CodeBook.html
+README.html
+*.zip
+CodeBook.columns.txt
+UCI HAR Dataset/
+tidy.txt

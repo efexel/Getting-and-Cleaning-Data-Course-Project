@@ -10,7 +10,7 @@ used for later analysis.
 
 The project requires the following output:
 
-1. [A tidy data set as described below](https://github.com/efexel/Getting-and-Cleaning-Data-Course-Project/blob/master/tidy.txt)
+1. A tidy data set as described below
 
 1. [This Github repository with the run_analysis.R script for performing the analysis](https://github.com/efexel/Getting-and-Cleaning-Data-Course-Project)
 
@@ -27,7 +27,7 @@ website represent data collected from the accelerometers from the Samsung
 Galaxy S smartphone.
 
 ### Data
-Here is the data for the project:
+The source data for this project was obtained here:
 
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
@@ -40,7 +40,7 @@ The goal of the project is to output a tidy data set containing only the average
 
 ## How to use
 
-The run_analysis.R script can be run from within R Studio.
+The run_analysis.R script can by sourcing the file from within R Studio.
 
 The run_analysis.R script does the following:
 
@@ -53,6 +53,14 @@ The run_analysis.R script does the following:
 4. Appropriately labels the data set with descriptive variable names.
 
 5. From the data set in step 4, creates a second, independent tidy dataset with the average of each variable for each activity and each subject.
+
+The output file, tidy.txt, can be read back into R Studio with:
+
+      data <- read.table('tidy.txt', header = TRUE)
+      View(data)
+
+See [CodeBook.md](https://github.com/efexel/Getting-and-Cleaning-Data-Course-Project/blob/master/CodeBook.md) for more detail on the output.
+
 
 ### References
 

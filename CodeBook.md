@@ -1,6 +1,6 @@
 # CodeBook
 
-The data in [tidy.txt](https://github.com/efexel/Getting-and-Cleaning-Data-Course-Project/blob/master/tidy.txt) was produced by [run_analysys.R](https://github.com/efexel/Getting-and-Cleaning-Data-Course-Project/blob/master/run_analysis.R).  The data was derived from the following source:
+The data output by [run_analysys.R](https://github.com/efexel/Getting-and-Cleaning-Data-Course-Project/blob/master/run_analysis.R) was derived from the following source:
 
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
@@ -9,24 +9,28 @@ data was obtained:  http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recogn
 
 # Data Transformation
 
-The data transformation produced by [run_analysys.R](https://github.com/efexel/Getting-and-Cleaning-Data-Course-Project/blob/master/run_analysis.R) is described below:
+[run_analysys.R](https://github.com/efexel/Getting-and-Cleaning-Data-Course-Project/blob/master/run_analysis.R) transforms the data by doing the following:
 
-1. For each of the training and test datasets
-    1. Merges data set (X_*dataset*.txt), activity ids (y_*dataset*.txt), subject ids (subject_*dataset*.txt), and activity names (activity_labels.txt) into a single data frame, using only the columns on mean and standard deviation from each measurement in the data set.
-    1. Column names obtained from features.txt have been cleaned up, removing punctuation, and adjusting case for readability and assigned to the data
-    obtained from X_*dataset*.txt.
-1. Merge the training and the test sets into a single data frame
-1. Pivot the data turning the measurements into rows using melt
-1. Rollup each measurement into a mean for each unique subject/activity
-1. Save the tidy dataset as `tidy.txt`
+    Note:  The italicized *dataset* below is a placeholder for the *training* or *test* datasets included in the zip file above.
 
+1. For each *training* and *test* *dataset* a data frame is produced by:
+    1. Merging data set (*dataset*/X_*dataset*.txt), activity ids
+    (*dataset*/y_*dataset*.txt), subject ids
+    (*dataset*/subject_*dataset*.txt), and activity names
+    (activity_labels.txt) into a single data frame.
+    1. Only the time and frequency columns containing mean and standard deviation values from each measurement in the data set are retained.
+    1. Column names obtained from features.txt have been cleaned up, removing punctuation, and adjusting case for readability and assigned to the data.
+1. Merging the training and the test data frames into a single data frame
+1. Pivoting the data turning the measurements into rows using melt
+1. Rolling up each measurement into a mean for each unique subject/activity
+1. Saving the tidy dataset to the current working directory as "tidy.txt"
 
 # Data Columns
 
-The file [tidy.txt](https://github.com/efexel/Getting-and-Cleaning-Data-Course-Project/blob/master/tidy.txt) contains the following columns:
+The resulting file, tidy.txt, contains the following columns:
 
-* **activity_name**:  Activity being performed
 * **subject_id**: ID of subject that data was collected from
+* **activity_name**:  Activity being performed
 * tBodyAccMeanX
 * tBodyAccMeanY
 * tBodyAccMeanZ
@@ -73,36 +77,36 @@ The file [tidy.txt](https://github.com/efexel/Getting-and-Cleaning-Data-Course-P
 * fBodyAccStdX
 * fBodyAccStdY
 * fBodyAccStdZ
-* fBodyAccMeanfreqX
-* fBodyAccMeanfreqY
-* fBodyAccMeanfreqZ
+* fBodyAccMeanFreqX
+* fBodyAccMeanFreqY
+* fBodyAccMeanFreqZ
 * fBodyAccJerkMeanX
 * fBodyAccJerkMeanY
 * fBodyAccJerkMeanZ
 * fBodyAccJerkStdX
 * fBodyAccJerkStdY
 * fBodyAccJerkStdZ
-* fBodyAccJerkMeanfreqX
-* fBodyAccJerkMeanfreqY
-* fBodyAccJerkMeanfreqZ
+* fBodyAccJerkMeanFreqX
+* fBodyAccJerkMeanFreqY
+* fBodyAccJerkMeanFreqZ
 * fBodyGyroMeanX
 * fBodyGyroMeanY
 * fBodyGyroMeanZ
 * fBodyGyroStdX
 * fBodyGyroStdY
 * fBodyGyroStdZ
-* fBodyGyroMeanfreqX
-* fBodyGyroMeanfreqY
-* fBodyGyroMeanfreqZ
+* fBodyGyroMeanFreqX
+* fBodyGyroMeanFreqY
+* fBodyGyroMeanFreqZ
 * fBodyAccMagMean
 * fBodyAccMagStd
-* fBodyAccMagMeanfreq
+* fBodyAccMagMeanFreq
 * fBodyBodyAccJerkMagMean
 * fBodyBodyAccJerkMagStd
-* fBodyBodyAccJerkMagMeanfreq
+* fBodyBodyAccJerkMagMeanFreq
 * fBodyBodyGyroMagMean
 * fBodyBodyGyroMagStd
-* fBodyBodyGyroMagMeanfreq
+* fBodyBodyGyroMagMeanFreq
 * fBodyBodyGyroJerkMagMean
 * fBodyBodyGyroJerkMagStd
-* fBodyBodyGyroJerkMagMeanfreq
+* fBodyBodyGyroJerkMagMeanFreq
