@@ -11,7 +11,7 @@ data was obtained:  http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recogn
 
 [run_analysys.R](https://github.com/efexel/Getting-and-Cleaning-Data-Course-Project/blob/master/run_analysis.R) transforms the data by doing the following:
 
-    Note:  The italicized *dataset* below is a placeholder for the *training* or *test* datasets included in the zip file above.
+Note:  The italicized *dataset* below is a placeholder for the *training* or *test* datasets included in the zip file above.
 
 1. For each *training* and *test* *dataset* a data frame is produced by:
     1. Merging data set (*dataset*/X_*dataset*.txt), activity ids
