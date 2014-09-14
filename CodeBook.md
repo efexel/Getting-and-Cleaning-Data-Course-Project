@@ -11,11 +11,14 @@ data was obtained:  http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recogn
 
 The data transformation produced by [run_analysys.R](https://github.com/efexel/Getting-and-Cleaning-Data-Course-Project/blob/master/run_analysis.R) is described below:
 
-
-1. The training and the test sets have been merged to create one data set.
-1. Only the the measurements on the mean and standard deviation for each measurement were extracted into this data set.
-1. Activity IDs in the original dataset have been replaced by descriptive activity names.
-1. Each variable in the original dataset has been averaged for each unique activity and subject combination.
+1. For each of the training and test datasets
+    1. Merges data set (X_*dataset*.txt), activity ids (y_*dataset*.txt), subject ids (subject_*dataset*.txt), and activity names (activity_labels.txt) into a single data frame, using only the columns on mean and standard deviation from each measurement in the data set.
+    1. Column names obtained from features.txt have been cleaned up, removing punctuation, and adjusting case for readability and assigned to the data
+    obtained from X_*dataset*.txt.
+1. Merge the training and the test sets into a single data frame
+1. Pivot the data turning the measurements into rows using melt
+1. Rollup each measurement into a mean for each unique subject/activity
+1. Save the tidy dataset as `tidy.txt`
 
 
 # Data Columns
@@ -23,70 +26,83 @@ The data transformation produced by [run_analysys.R](https://github.com/efexel/G
 The file [tidy.txt](https://github.com/efexel/Getting-and-Cleaning-Data-Course-Project/blob/master/tidy.txt) contains the following columns:
 
 * **activity_name**:  Activity being performed
-* **subject_id**: Subject data was collected from
-* tBodyAcc-mean()-X
-* tBodyAcc-mean()-Y
-* tBodyAcc-mean()-Z
-* tBodyAcc-std()-X
-* tBodyAcc-std()-Y
-* tBodyAcc-std()-Z
-* tGravityAcc-mean()-X
-* tGravityAcc-mean()-Y
-* tGravityAcc-mean()-Z
-* tGravityAcc-std()-X
-* tGravityAcc-std()-Y
-* tGravityAcc-std()-Z
-* tBodyAccJerk-mean()-X
-* tBodyAccJerk-mean()-Y
-* tBodyAccJerk-mean()-Z
-* tBodyAccJerk-std()-X
-* tBodyAccJerk-std()-Y
-* tBodyAccJerk-std()-Z
-* tBodyGyro-mean()-X
-* tBodyGyro-mean()-Y
-* tBodyGyro-mean()-Z
-* tBodyGyro-std()-X
-* tBodyGyro-std()-Y
-* tBodyGyro-std()-Z
-* tBodyGyroJerk-mean()-X
-* tBodyGyroJerk-mean()-Y
-* tBodyGyroJerk-mean()-Z
-* tBodyGyroJerk-std()-X
-* tBodyGyroJerk-std()-Y
-* tBodyGyroJerk-std()-Z
-* tBodyAccMag-mean()
-* tBodyAccMag-std()
-* tGravityAccMag-mean()
-* tGravityAccMag-std()
-* tBodyAccJerkMag-mean()
-* tBodyAccJerkMag-std()
-* tBodyGyroMag-mean()
-* tBodyGyroMag-std()
-* tBodyGyroJerkMag-mean()
-* tBodyGyroJerkMag-std()
-* fBodyAcc-mean()-X
-* fBodyAcc-mean()-Y
-* fBodyAcc-mean()-Z
-* fBodyAcc-std()-X
-* fBodyAcc-std()-Y
-* fBodyAcc-std()-Z
-* fBodyAccJerk-mean()-X
-* fBodyAccJerk-mean()-Y
-* fBodyAccJerk-mean()-Z
-* fBodyAccJerk-std()-X
-* fBodyAccJerk-std()-Y
-* fBodyAccJerk-std()-Z
-* fBodyGyro-mean()-X
-* fBodyGyro-mean()-Y
-* fBodyGyro-mean()-Z
-* fBodyGyro-std()-X
-* fBodyGyro-std()-Y
-* fBodyGyro-std()-Z
-* fBodyAccMag-mean()
-* fBodyAccMag-std()
-* fBodyBodyAccJerkMag-mean()
-* fBodyBodyAccJerkMag-std()
-* fBodyBodyGyroMag-mean()
-* fBodyBodyGyroMag-std()
-* fBodyBodyGyroJerkMag-mean()
-* fBodyBodyGyroJerkMag-std()
+* **subject_id**: ID of subject that data was collected from
+* tBodyAccMeanX
+* tBodyAccMeanY
+* tBodyAccMeanZ
+* tBodyAccStdX
+* tBodyAccStdY
+* tBodyAccStdZ
+* tGravityAccMeanX
+* tGravityAccMeanY
+* tGravityAccMeanZ
+* tGravityAccStdX
+* tGravityAccStdY
+* tGravityAccStdZ
+* tBodyAccJerkMeanX
+* tBodyAccJerkMeanY
+* tBodyAccJerkMeanZ
+* tBodyAccJerkStdX
+* tBodyAccJerkStdY
+* tBodyAccJerkStdZ
+* tBodyGyroMeanX
+* tBodyGyroMeanY
+* tBodyGyroMeanZ
+* tBodyGyroStdX
+* tBodyGyroStdY
+* tBodyGyroStdZ
+* tBodyGyroJerkMeanX
+* tBodyGyroJerkMeanY
+* tBodyGyroJerkMeanZ
+* tBodyGyroJerkStdX
+* tBodyGyroJerkStdY
+* tBodyGyroJerkStdZ
+* tBodyAccMagMean
+* tBodyAccMagStd
+* tGravityAccMagMean
+* tGravityAccMagStd
+* tBodyAccJerkMagMean
+* tBodyAccJerkMagStd
+* tBodyGyroMagMean
+* tBodyGyroMagStd
+* tBodyGyroJerkMagMean
+* tBodyGyroJerkMagStd
+* fBodyAccMeanX
+* fBodyAccMeanY
+* fBodyAccMeanZ
+* fBodyAccStdX
+* fBodyAccStdY
+* fBodyAccStdZ
+* fBodyAccMeanfreqX
+* fBodyAccMeanfreqY
+* fBodyAccMeanfreqZ
+* fBodyAccJerkMeanX
+* fBodyAccJerkMeanY
+* fBodyAccJerkMeanZ
+* fBodyAccJerkStdX
+* fBodyAccJerkStdY
+* fBodyAccJerkStdZ
+* fBodyAccJerkMeanfreqX
+* fBodyAccJerkMeanfreqY
+* fBodyAccJerkMeanfreqZ
+* fBodyGyroMeanX
+* fBodyGyroMeanY
+* fBodyGyroMeanZ
+* fBodyGyroStdX
+* fBodyGyroStdY
+* fBodyGyroStdZ
+* fBodyGyroMeanfreqX
+* fBodyGyroMeanfreqY
+* fBodyGyroMeanfreqZ
+* fBodyAccMagMean
+* fBodyAccMagStd
+* fBodyAccMagMeanfreq
+* fBodyBodyAccJerkMagMean
+* fBodyBodyAccJerkMagStd
+* fBodyBodyAccJerkMagMeanfreq
+* fBodyBodyGyroMagMean
+* fBodyBodyGyroMagStd
+* fBodyBodyGyroMagMeanfreq
+* fBodyBodyGyroJerkMagMean
+* fBodyBodyGyroJerkMagStd
+* fBodyBodyGyroJerkMagMeanfreq

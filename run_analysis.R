@@ -2,7 +2,7 @@
 
 ##### Configuration and setup
 ## Uncomment and set if you prefer a different working directory
-#setwd("~/Desktop/Coursera/Data\ Science/3\ -\ Getting\ and\ Cleaning\ Data/Course\ Project/")
+setwd("~/Desktop/Coursera/Data\ Science/3\ -\ Getting\ and\ Cleaning\ Data/Course\ Project/")
 input_data_url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
 output_file_name <- "tidy.txt"
 
@@ -51,20 +51,24 @@ merge_data_sets <- function(datadir){
     ## Requirements 1-4 are handled in this function.  For purposes of
     ## efficiency, they are not handled in numeric order.
 
-    # Import features
-    features <- read.table(sprintf("%s/features.txt", datadir))[,2]
-    # Read activity labels
-    activity_labels <- read.table(sprintf("%s/activity_labels.txt", datadir),
-                                  col.names = c("id", "name"))
+    ## Import and clean up feature names for readability and use as variables
+    # Title case the m and d in mean()/std(), remove parens and trailing - if
+    # present.  Use perl's regex syntax in order to title case mean/std to
+    # Mean/Std for readability as column names
+    features <- gsub("-(m|s)(.*)\\(\\)-?",
+                     read.table(sprintf("%s/features.txt", datadir))[,2],
+                     replacement="\\U\\1\\L\\2", perl=TRUE)
 
     ## Requirement #2: Extracts only the measurements on the mean and standard
     ## deviation for each measurement.
-    # Create vector of indices of columns containing 'mean' or 'std'.  We
+    # Create vector of indices of columns containing 'Mean' or 'Std'.  We
     # can use this later to filter the data for both data sets.
-    output_features <- grep("mean\\(|std\\(", features)
+    # We are only extracting the original measurements for time/frequency.
+    output_features <- features[grep("^(f|t).*(Mean|Std)", features)]
 
-    # Clean up feature names
-    #features <- sapply(features, gsub, pattern='\\(|\\)|,', replacement="")
+    ## Read activity labels
+    activity_labels <- read.table(sprintf("%s/activity_labels.txt", datadir),
+                                  col.names = c("id", "name"))
 
     # Loop through the test and train data sets.  For each data set, read the
     # data from the 3 files (subject_%s.txt, X_%s.txt, and y_%s.txt), append
@@ -78,9 +82,11 @@ merge_data_sets <- function(datadir){
         subject <- read.table(
             sprintf("%s/%s/subject_%s.txt", datadir, source, source),
             col.names = "subject_id")
+        # Note: Data is filtered here as per requirement #2, using the
+        # output_features vector created above.
         data <- read.table(
             sprintf("%s/%s/X_%s.txt", datadir, source, source),
-            col.names = features, check.names = FALSE)
+            col.names = features, check.names = FALSE)[,output_features]
         activities <- read.table(
             sprintf("%s/%s/y_%s.txt", datadir, source, source),
             col.names = "activity_id")
@@ -92,7 +98,7 @@ merge_data_sets <- function(datadir){
             match(activities$activity_id, activity_labels$id)]
         # Create a variable named train or test that contains the frames
         # above merged into a single frame
-        assign(source, cbind(subject, activities, data[,output_features]))
+        assign(source, cbind(subject, activities, data))
     }
     ## Requirement #1: Merges the training and the test sets to create one
     ## data set.
@@ -107,12 +113,17 @@ create_tidy_set <- function(datadir, output_file_name) {
     # First handle requirements 1-4...
     data <- merge_data_sets(datadir)
 
+    # Output column names for use by the CodeBook
+    #fc <- file("CodeBook.columns.txt")
+    #writeLines(colnames(data), fc)
+    #close(fc)
+
     ## Requirement #5: From the data set in step 4, creates a second,
     ## independent tidy data set with the average of each variable for each
     ## activity and each subject.
 
     message("Pivoting data...")
-    # Pivot the values of the data in to individual rows, keeping the
+    # Pivot the values of the data into individual rows, keeping the
     # identifier columns passed as id intact, resulting in a data frame
     # containing the following columns:
     #   "subject_id", "activity_id", "activity_name", "variable", "value"
