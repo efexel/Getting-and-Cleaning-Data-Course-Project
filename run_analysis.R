@@ -81,6 +81,8 @@ merge_data_sets <- function(datadir){
     activity_labels <- read.table(sprintf("%s/activity_labels.txt", datadir),
                                   col.names = c("id", "name"))
 
+    # Create an empty data.frame to collect output data
+    output <- data.frame()
     # Loop through the test and train data sets.  For each data set, read the
     # data from the 3 files (subject_%s.txt, X_%s.txt, and y_%s.txt), append
     # the activity, names, and merge the 3 files into a single data frame
@@ -107,14 +109,16 @@ merge_data_sets <- function(datadir){
         # Append activity names to the activities data frame
         activities$activity_name <- activity_labels$name[
             match(activities$activity_id, activity_labels$id)]
-        # Create a variable named train or test that contains the frames
-        # above merged into a single frame
-        assign(source, cbind(subject, activities, data))
+
+        ## Requirement #1: Merges the training and the test sets to create one
+        ## data set.
+        # We do this by column binding the subjects, activities, and
+        # measurement data, then we append the result to our output
+        # data.frame
+        output <- rbind(output, cbind(subject, activities, data))
     }
-    ## Requirement #1: Merges the training and the test sets to create one
-    ## data set.
-    message("Merging data sets...")
-    return(rbind(train, test))
+    # Return filtered, labeled, merged training/test datasets as one data.frame
+    return(output)
 }
 
 # Create tidy data set
