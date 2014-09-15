@@ -5,7 +5,6 @@
 # Excessive commenting is present for the ease of peer review.
 
 ##### Configuration and setup
-## Uncomment and set if you prefer a different working directory
 #setwd("~/dsgacdcp")
 input_data_url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
 output_file_name <- "tidy.txt"
