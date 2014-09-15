@@ -36,7 +36,7 @@ data was obtained:  http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recogn
 
 ### Project Goal
 
-The goal of the project is to output a tidy data set containing only the average of the mean and the standard deviations of each activity and each subject from both the training and test data included in the zip file referenced above.
+The goal of the project is to output a tidy data set containing only the average of the mean and the standard deviations of each activity and each subject from both the train and test data included in the zip file referenced above.
 
 ## How to use
 
@@ -51,7 +51,7 @@ The run_analysis.R script does the following:
     1. If the zip file is not present, it is downloaded to the current working directory.
     1. Uzip the zip file.
 
-1. Extracts only the measurements on the mean and standard deviation for each measurement from both the test and training sets.
+1. Extracts only the measurements on the mean and standard deviation for each measurement from both the test and train sets.
 
 3. Uses descriptive activity names to name the activities in the data set
 
