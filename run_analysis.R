@@ -65,7 +65,7 @@ merge_data_sets <- function(datadir){
     # following the initial character, removing parens and trailing hyphen
     # if present.
     # Example: "fBodyAccJerk-meanFreq()-X" -> "fBodyAccJerkMeanFreqX"
-    features <- gsub("-([a-z])(.*)?(\\(\\))-?",
+    features <- gsub("-([a-z])(.*)?\\(\\)-?",
                      read.table(sprintf("%s/features.txt", datadir))[,2],
                      replacement="\\U\\1\\E\\2", perl=TRUE)
 
