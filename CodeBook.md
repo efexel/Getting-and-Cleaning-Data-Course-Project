@@ -110,3 +110,14 @@ The resulting file, tidy.txt, contains the following columns:
 * fBodyBodyGyroJerkMagMean
 * fBodyBodyGyroJerkMagStd
 * fBodyBodyGyroJerkMagMeanFreq
+
+## activity_name
+
+The possible values for activity_name are:
+
+1. WALKING
+2. WALKING_UPSTAIRS
+3. WALKING_DOWNSTAIRS
+4. SITTING
+5. STANDING
+6. LAYING
