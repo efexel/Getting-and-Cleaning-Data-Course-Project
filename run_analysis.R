@@ -85,8 +85,8 @@ merge_data_sets <- function(datadir){
     output <- data.frame()
     # Loop through the test and train data sets.  For each data set, read the
     # data from the 3 files (subject_%s.txt, X_%s.txt, and y_%s.txt), append
-    # the activity, names, and merge the 3 files into a single data frame
-    # named after the source data set.
+    # the activity, names, and merge the 3 files appending the result into
+    # the output data frame.
     for (source in c("test", "train")){
         message(sprintf("Processing %s data...", source))
         ## Requirement #4: Appropriately labels the data set with descriptive
