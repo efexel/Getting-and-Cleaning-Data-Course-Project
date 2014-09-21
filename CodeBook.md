@@ -131,9 +131,9 @@ Variables ending in X, Y, or Z represent the measurements along the X, Y, and ax
 
 The possible values for activity_name are:
 
-1. WALKING
-2. WALKING_UPSTAIRS
-3. WALKING_DOWNSTAIRS
-4. SITTING
-5. STANDING
-6. LAYING
+* WALKING
+* WALKING_UPSTAIRS
+* WALKING_DOWNSTAIRS
+* SITTING
+* STANDING
+* LAYING
