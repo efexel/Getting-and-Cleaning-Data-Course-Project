@@ -19,13 +19,9 @@ The sensor signals (accelerometer and gyroscope) were pre-processed by applying 
 
 Check the README.txt file for further details about this dataset.
 
-### Acknowledgement
-
-Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
-
 ## Data Transformation
 
-The goal of the data transformation is to aggregate each mean and standard deviation measurement in the original data file to each unique subject and activity combination.
+The goal of the data transformation is to merge the test and training data sets and then aggregate each mean and standard deviation measurement in the original data files to a mean for each unique subject/activity combination.
 
 [run_analysys.R](https://github.com/efexel/Getting-and-Cleaning-Data-Course-Project/blob/master/run_analysis.R) transforms the data by doing the following:
 
@@ -39,18 +35,15 @@ Note:  The italicized *dataset* below is a placeholder for the *train* or *test*
     1. Only the time and frequency columns containing mean and standard deviation values from each measurement in the data set are retained.
     1. Column names obtained from features.txt have been cleaned up, removing punctuation, and adjusting case for readability and assigned to the data.
 1. Merging the train and the test data frames into a single data frame
-1. Pivoting the data turning the measurements into rows using melt
+1. Pivoting the data turning the measurement columns into rows using melt
 1. Rolling up each measurement into a mean for each unique subject/activity
-1. Saving the tidy dataset to the current working directory as "tidy.txt"
+1. Saving the resulting tidy dataset to the current working directory as "tidy.txt"
 
 ## Output Data Columns
 
 The resulting file, tidy.txt, contains the following columns.  All variables are the mean of all measurement values for each unique subject and activity combination.
 
-Variables ending in X, Y, or Z represent the measurements along the X, Y, and axis.  Items not ending in X, Y, or Z represent the mean of all axis combined in order to measure the magnitude of the movement.
-
-Variables beginning with t are time based measurements.
-Variables beginning with f are frequency based measurements.
+Variables ending in X, Y, or Z represent the measurements along the X, Y, and axis.  Items not ending in X, Y, or Z represent the mean of all axis combined in order to measure the magnitude of the movement.  Variables beginning with t are time based measurements.  Variables beginning with f are frequency based measurements.
 
 * **subject_id**: ID of subject that data was collected from
 * **activity_name**:  Activity being performed
