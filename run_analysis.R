@@ -20,13 +20,18 @@ load_prerequisites <- function(packages){
 
 # Given a URL pointing to a zip file, checks to see if the file, or extracted
 # folder from the file exists in the current directory, and if not, downloads
-# and extracts it.  Returns the directory name.
-get_extract_file <- function(url){
+# and extracts it.  Returns the directory name or input_file
+get_extract_file <- function(url, input_file=""){
     file = basename(URLdecode(url))
     datadir <- gsub(".zip", "", file)
-    if(!file.exists(datadir)) {
+    if((nchar(input_file) && !file.exists(input_file))
+        && (!file.exists(datadir))) {
         # No data directory, do we have the zip file?
-        message(sprintf("Did not find '%s' directory", datadir))
+        if(nchar(input_file)){
+            message(sprintf("Did not find file: '%s'", datadir))
+        } else {
+            message(sprintf("Did not find '%s' directory", datadir))
+        }
         if(!file.exists(file)){
             # No zip file either, download it
             msg <- sprintf("Downloading '%s' from %s...", file, url)
@@ -49,7 +54,10 @@ get_extract_file <- function(url){
         message("Unzipping file...")
         unzip(file)
     }
-    return(datadir)
+    if(nchar(input_file))
+        return(input_file)
+    else
+        return(datadir)
 }
 
 # Extracts only the measurements on the mean and standard deviation for each
